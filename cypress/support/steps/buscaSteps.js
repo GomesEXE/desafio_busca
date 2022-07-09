@@ -1,64 +1,85 @@
 /* global Given, Then, When */
 
-import HomePage from '../pageobjects/homePage'
-const homePage = new HomePage
+import BuscaPage from '../pageobjects/buscaPage'
+const buscaPage = new BuscaPage
 
-Given("que estou na home Page", () => {
-	homePage.acessarSite();
+//caso 01 
+Given("que estou na home page", () => {
+	buscaPage.acessarSite();
 });
 
-When("inserir o termo TV", () => {
-	homePage.pesquisaPorClick();
+When("inserir o termo retrovisor", () => {
+	buscaPage.typeInputItem();
 });
 
 
 When("clicar na lupa", () => {
-	return true;
+	buscaPage.pesquisaPorClick();
 });
 
 
-Then("será exibida a página de busca com os produtos TV", () => {
-	return true;
+Then("será exibida a página de busca com os produtos retrovisor", () => {
+	buscaPage.validarBusca();
 
 });
 
 //caso 02
 
-Given("que estou na home page", () => {
-	homePage.acessarSite()
-});
-
-
-When("inserir o termo Geladeira", () => {
-	homePage.pesquisaPorEnter()
-});
-
-
 When("apertar a tecla Enter", () => {
-	return true;
-});
-
-
-Then("será exibida a página de busca com os produtos Geladeira", () => {
-	return true;
+	buscaPage.pesquisaPorEnter();
 });
 
 //caso 03
-Given("que estou na home page", () => {
-	homePage.acessarSite()
-});
-
 
 When("clico no input de busca", () => {
-	return true;	
+	buscaPage.ClickInput();
 });
 
 
-When("clico no primeiro item da lista", () => {
-	return true;
+Then("será exibido um popup com os termos mais pesquisados no site", () => {
+	buscaPage.validarPopupMaisBuscados();
+});
+
+//caso 04
+
+
+Then("será listados opções relacionado ao termo digitado", () => {
+	buscaPage.validarAutoCompleteItem();
+});
+
+//caso 05
+
+
+When("inserir o termo feijao", () => {
+	buscaPage.typeInputNoItem();
 });
 
 
-Then("será exibida a página de busca com os produtos do primeiro item", () => {
-	homePage.validarPopupMaisBuscados()
+Then("será exibida a página com a seguinte mensagem Ops! Nenhum resultado para feijao", () => {
+	buscaPage.validarSemResultado();
+});
+
+//caso 06
+
+Given("que estou na página de busca", () => {
+	buscaPage.acessarSite();
+	buscaPage.typeInputItem();
+	buscaPage.pesquisaPorClick();
+});
+
+When("selecionar o filtro de cor Vermelho", () => {
+	buscaPage.clicarFiltroVermelho();
+});
+
+Then("a pagina deve carregar somente os itens com a cor Vermelha", () => {
+	buscaPage.validarFiltroVermelhoSelect();
+});
+
+//caso 07
+When("Clico na opção de Ordenar Por Menor Preço", () => {
+	buscaPage.clicarOrdemMenorPreco();
+});
+
+Then("o sistema deve exibir os produtos na ordem dos preços do menor para o maior", () => {
+	buscaPage.validarOrdemMenorPrecoSelect();
 });
