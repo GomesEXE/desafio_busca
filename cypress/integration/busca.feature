@@ -17,7 +17,6 @@ Given que estou na home page
 When clico no input de busca
 Then será exibido um popup com os termos mais pesquisados no site
 
-@focus
 Scenario: Validar autocomplete da barra de busca
 Given que estou na home page
 When inserir o termo retrovisor
